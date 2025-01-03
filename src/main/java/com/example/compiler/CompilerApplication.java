@@ -16,9 +16,11 @@ public class CompilerApplication {
 	public static void main(String[] args) {
 		String testInput = """           
 				class Main {
-				    public static void main(String[] args) {				    				  
-				        System.out.println(52);
-				    }
+				    public static void main(String[] args) {
+				    	{
+				    		System.out.println(52);				        					        	
+				    	}					    			    				  				        
+				    }				    				    				 
 				}
 				
 				class Example {				   
@@ -36,6 +38,25 @@ public class CompilerApplication {
 				    	b = a;
 				    	return;				    
 				    }
+				    
+				    public void mul(){
+				    	System.out.println(a*b);
+				    	return;
+				    }
+				    
+				    public void div(){
+				    	System.out.println(a/b);
+				    	return;
+				    }				    				    				   
+				}
+				
+				class Example2 {
+					Example example;														
+					
+					public void Example2{
+						example = new Example( );
+						return;
+					}			
 				}				
             """;
 		// convert input to a stream of characters
@@ -51,6 +72,10 @@ public class CompilerApplication {
 		ParseTree parseTree = parser.program();
 		MiniJavaSemanticAnalyzer analyzer = new MiniJavaSemanticAnalyzer();
 		analyzer.visit(parseTree);
+
+		MiniJavaTACGenerator generator = new MiniJavaTACGenerator();
+		generator.visit(parseTree);
+		generator.writeTAC();
 	}
 
 }

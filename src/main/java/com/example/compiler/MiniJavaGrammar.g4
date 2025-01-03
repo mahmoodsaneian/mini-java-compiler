@@ -2,7 +2,7 @@ grammar MiniJavaGrammar;
 
 // Parser rules
 program     : mainClass (classDeclaration)* EOF;
-mainClass   : 'class' IDENTIFIER '{' 'public' 'static' 'void' 'main' '(' 'String' '[' ']' IDENTIFIER ')' '{' statement '}' '}';
+mainClass   : 'class' IDENTIFIER '{' 'public' 'static' 'void' 'main' '(' 'String' '[' ']' IDENTIFIER ')' '{' (statement)* '}' '}';
 classDeclaration
             : 'class' IDENTIFIER ('extends' IDENTIFIER)? '{' (varDeclaration)* (methodDeclaration)* '}';
 
