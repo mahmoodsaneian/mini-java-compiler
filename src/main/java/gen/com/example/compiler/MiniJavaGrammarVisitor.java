@@ -29,6 +29,12 @@ public interface MiniJavaGrammarVisitor<T> extends ParseTreeVisitor<T> {
 	 */
 	T visitClassDeclaration(MiniJavaGrammarParser.ClassDeclarationContext ctx);
 	/**
+	 * Visit a parse tree produced by {@link MiniJavaGrammarParser#constructorDeclaration}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitConstructorDeclaration(MiniJavaGrammarParser.ConstructorDeclarationContext ctx);
+	/**
 	 * Visit a parse tree produced by {@link MiniJavaGrammarParser#varDeclaration}.
 	 * @param ctx the parse tree
 	 * @return the visitor result

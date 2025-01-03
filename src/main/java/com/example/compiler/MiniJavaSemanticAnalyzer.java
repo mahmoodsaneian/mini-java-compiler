@@ -93,6 +93,28 @@ public class MiniJavaSemanticAnalyzer extends MiniJavaGrammarBaseVisitor<Void> {
     }
 
     @Override
+    public Void visitConstructorDeclaration(MiniJavaGrammarParser.ConstructorDeclarationContext ctx){
+        String methodName = ctx.IDENTIFIER().getText();
+        int paramCount = ctx.parameter() != null ? ctx.parameter().size() : 0;
+
+        declareSymbol(methodName,null, true, paramCount);
+
+        enterScope();
+
+        if (ctx.parameter() != null) {
+            for (MiniJavaGrammarParser.ParameterContext param : ctx.parameter()) {
+                String paramName = param.IDENTIFIER().getText();
+                String paramType = param.type().getText();
+                declareSymbol(paramName, paramType, false, 0);
+            }
+        }
+
+        super.visitConstructorDeclaration(ctx);
+        exitScope();
+        return null;
+    }
+
+    @Override
     public Void visitMethodDeclaration(MiniJavaGrammarParser.MethodDeclarationContext ctx) {
         String methodName = ctx.IDENTIFIER().getText();
         String returnType = ctx.type() != null ? ctx.type().getText() : "void"; // Handle void return type

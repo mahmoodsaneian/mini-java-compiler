@@ -4,7 +4,10 @@ grammar MiniJavaGrammar;
 program     : mainClass (classDeclaration)* EOF;
 mainClass   : 'class' IDENTIFIER '{' 'public' 'static' 'void' 'main' '(' 'String' '[' ']' IDENTIFIER ')' '{' (statement)* '}' '}';
 classDeclaration
-            : 'class' IDENTIFIER ('extends' IDENTIFIER)? '{' (varDeclaration)* (methodDeclaration)* '}';
+            : 'class' IDENTIFIER ('extends' IDENTIFIER)? '{' (varDeclaration)* (constructorDeclaration)* (methodDeclaration)* '}';
+
+constructorDeclaration
+    : 'public' IDENTIFIER '(' (parameter (',' parameter)*)? ')' '{' (varDeclaration)* (statement)* '}';
 
 varDeclaration
             : type IDENTIFIER ';';
@@ -25,12 +28,14 @@ statement   : '{' (statement)* '}'
             | 'while' '(' expression ')' statement
             | 'System.out.println' '(' expression ')' ';'
             | IDENTIFIER '=' expression ';'
+            | expression '=' expression ';'
             | IDENTIFIER '[' expression ']' '=' expression ';';
 
 expression  : expression ('&&' | '||' | '==' | '/' | '>' | '=<' | '>=' | '<' | '+' | '-' | '*') expression
             | expression '[' expression ']'
             | expression '.' 'length'
             | expression '.' IDENTIFIER '(' (expression (',' expression)*)? ')'
+            | expression '.' IDENTIFIER
             | INTEGER_LITERAL
             | STRING_LITERAL
             | 'true'

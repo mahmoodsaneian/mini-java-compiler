@@ -17,44 +17,61 @@ public class CompilerApplication {
 		String testInput = """           
 				class Main {
 				    public static void main(String[] args) {
-				    	{
-				    		System.out.println(52);				        					        	
-				    	}					    			    				  				        
+				    	System.out.println(52);				        					        					    						    			    				  				        
 				    }				    				    				 
 				}
 				
-				class Example {				   
-					int a;
-				    int b;				    					    
-				    public int getX() {
-				    	a = 5;
-				    	b = 5;
+				class Calculator {
+					boolean usage;
+									   									    					    
+				    public int add(int a, int b) {				    	
 				        System.out.println(a + b);
-				        return a;
+				        usage = true;
+				        return a + b;
 				    }
 				    
-				    public void setX(int a, int b) {
-				    	a = b;
-				    	b = a;
-				    	return;				    
+				    public int sub(int a, int b) {
+				    	System.out.println(a - b);
+				    	usage = true;
+				    	return a - b;				    
 				    }
 				    
-				    public void mul(){
+				    public int mul(int a, int b) {
 				    	System.out.println(a*b);
-				    	return;
+				    	usage = true;
+				    	return a * b;
 				    }
 				    
-				    public void div(){
+				    public int div(int a, int b) {
 				    	System.out.println(a/b);
+				    	usage = true;
+				    	return a / b;
+				    }
+				    
+				    public void test(){
+				    	while(1) {
+				    		System.out.println(2 + 2);				    	
+				    	}
 				    	return;
-				    }				    				    				   
+				    }		    				    				   
 				}
 				
-				class Example2 {
-					Example example;														
+				class CallCalculator {
+					Calculator calculator;														
+					int add;
+					int sub;
+					int mul;
+					int div;
+					public CallCalculator () {
+						calculator = new Calculator();												
+					}
 					
-					public void Example2{
-						example = new Example( );
+					public void calculate(){
+						sub = calculator.sub(3, 4);
+						if (10 < 20) { add = calculator.add(1, 2); }
+						else { add = 4; }																		
+						mul = calculator.mul(5, 6);
+						div = calculator.div(7, 8);
 						return;
 					}			
 				}				

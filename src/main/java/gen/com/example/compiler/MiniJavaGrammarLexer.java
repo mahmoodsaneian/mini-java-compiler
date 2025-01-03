@@ -48,7 +48,7 @@ public class MiniJavaGrammarLexer extends Lexer {
 	private static String[] makeLiteralNames() {
 		return new String[] {
 			null, "'class'", "'{'", "'public'", "'static'", "'void'", "'main'", "'('", 
-			"'String'", "'['", "']'", "')'", "'}'", "'extends'", "';'", "','", "'return'", 
+			"'String'", "'['", "']'", "')'", "'}'", "'extends'", "','", "';'", "'return'", 
 			"'int'", "'boolean'", "'if'", "'else'", "'while'", "'System.out.println'", 
 			"'='", "'&&'", "'||'", "'=='", "'/'", "'>'", "'=<'", "'>='", "'<'", "'+'", 
 			"'-'", "'*'", "'.'", "'length'", "'true'", "'false'", "'this'", "'new'", 
@@ -238,8 +238,8 @@ public class MiniJavaGrammarLexer extends Lexer {
 		"\u0000\u0091\u0092\u0005x\u0000\u0000\u0092\u0093\u0005t\u0000\u0000\u0093"+
 		"\u0094\u0005e\u0000\u0000\u0094\u0095\u0005n\u0000\u0000\u0095\u0096\u0005"+
 		"d\u0000\u0000\u0096\u0097\u0005s\u0000\u0000\u0097\u001a\u0001\u0000\u0000"+
-		"\u0000\u0098\u0099\u0005;\u0000\u0000\u0099\u001c\u0001\u0000\u0000\u0000"+
-		"\u009a\u009b\u0005,\u0000\u0000\u009b\u001e\u0001\u0000\u0000\u0000\u009c"+
+		"\u0000\u0098\u0099\u0005,\u0000\u0000\u0099\u001c\u0001\u0000\u0000\u0000"+
+		"\u009a\u009b\u0005;\u0000\u0000\u009b\u001e\u0001\u0000\u0000\u0000\u009c"+
 		"\u009d\u0005r\u0000\u0000\u009d\u009e\u0005e\u0000\u0000\u009e\u009f\u0005"+
 		"t\u0000\u0000\u009f\u00a0\u0005u\u0000\u0000\u00a0\u00a1\u0005r\u0000"+
 		"\u0000\u00a1\u00a2\u0005n\u0000\u0000\u00a2 \u0001\u0000\u0000\u0000\u00a3"+
