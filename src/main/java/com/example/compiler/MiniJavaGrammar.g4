@@ -10,7 +10,7 @@ varDeclaration
             : type IDENTIFIER ';';
 
 methodDeclaration
-            : 'public' type IDENTIFIER '(' (parameter (',' parameter)*)? ')' '{' (varDeclaration)* (statement)* 'return' expression ';' '}';
+            : 'public' (type | 'void') IDENTIFIER '(' (parameter (',' parameter)*)? ')' '{' (varDeclaration)* (statement)* ('return' expression ';' | 'return' ';') '}';
 
 parameter   : type IDENTIFIER;
 

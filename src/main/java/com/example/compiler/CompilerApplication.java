@@ -30,6 +30,12 @@ public class CompilerApplication {
 				        System.out.println(a + b);
 				        return a;
 				    }
+				    
+				    public void setX(int a, int b) {
+				    	a = b;
+				    	b = a;
+				    	return;				    
+				    }
 				}				
             """;
 		// convert input to a stream of characters
@@ -43,7 +49,8 @@ public class CompilerApplication {
 
 		// generate parse tree
 		ParseTree parseTree = parser.program();
-		System.out.println(parseTree.toStringTree(parser));
+		MiniJavaSemanticAnalyzer analyzer = new MiniJavaSemanticAnalyzer();
+		analyzer.visit(parseTree);
 	}
 
 }
