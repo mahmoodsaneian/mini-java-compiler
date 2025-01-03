@@ -34,15 +34,31 @@ public class MiniJavaTACGenerator extends MiniJavaGrammarBaseVisitor<String> {
     @Override
     public String visitExpression(MiniJavaGrammarParser.ExpressionContext ctx) {
         if (ctx.getChildCount() == 3) { // Binary operation (e.g., a + b)
-            String left = visit(ctx.expression(0));
-            String right = visit(ctx.expression(1));
-            String temp = newTemp();
-            emit(temp + " = " + left + " " + ctx.getChild(1).getText() + " " + right + ";");
-            return temp;
+            if (ctx.getChild(0).getText().equals("(")) {
+                return visit(ctx.expression(0));
+            } else {
+                String left = visit(ctx.expression(0));
+                String right = visit(ctx.expression(1));
+                String temp = newTemp();
+                emit(temp + " = " + left + " " + ctx.getChild(1).getText() + " " + right + ";");
+                return temp;
+            }
         } else if (ctx.IDENTIFIER() != null) {
             return ctx.IDENTIFIER().getText();
         } else if (ctx.INTEGER_LITERAL() != null) {
             return ctx.INTEGER_LITERAL().getText();
+        } else if (ctx.getChild(0).getText().equals("(")) {
+            if (ctx.expression() != null) {
+                visit(ctx.expression(0));
+            }
+        } else if (ctx.getChild(0).getText().equals("false") || ctx.getChild(0).getText().equals("true")) {
+            return ctx.getChild(0).getText();
+        } else if (ctx.getChild(0).getText().equals("new") && ctx.getChild(1).getText().equals("int")) {
+            return "int[" + visit(ctx.expression(0)) + "]";
+        } else if (ctx.getChild(1).getText().equals("[") && ctx.getChild(3).getText().equals("]")) {
+            String temp = newTemp();
+            emit(temp + " = " + ctx.getText() + ";");
+            return temp;
         }
         return super.visitExpression(ctx);
     }
@@ -54,7 +70,12 @@ public class MiniJavaTACGenerator extends MiniJavaGrammarBaseVisitor<String> {
             String varName = ctx.IDENTIFIER().getText();
             String value = visit(ctx.expression(0));
             emit(varName + " = " + value + ";");
-        } else if (ctx.getChild(0).getText().equals("System.out.println")) {
+        } else if (ctx.IDENTIFIER() != null && ctx.getChild(1).getText().equals("[")) {
+            String varName = ctx.IDENTIFIER().getText();
+            String index = visit(ctx.expression(0));
+            String value = visit(ctx.expression(1));
+            emit(varName + "[" + index + "]" + " = " + value + ";");
+        }else if (ctx.getChild(0).getText().equals("System.out.println")) {
             // Print statement (e.g., System.out.println(52);)
             String value = visit(ctx.expression(0));
             emit("print " + value + ";");
@@ -110,6 +131,14 @@ public class MiniJavaTACGenerator extends MiniJavaGrammarBaseVisitor<String> {
                 emit("return;");
             }
         }else if (ctx.getChild(0).getText().equals("{")) {
+            if (ctx.statement() != null) {
+                visit(ctx.statement(0));
+            }
+        }else if (ctx.getChild(0).getText().equals("[")) {
+            if (ctx.statement() != null) {
+                visit(ctx.statement(0));
+            }
+        }else if (ctx.getChild(0).getText().equals("(")) {
             if (ctx.statement() != null) {
                 visit(ctx.statement(0));
             }

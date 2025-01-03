@@ -17,34 +17,31 @@ public class CompilerApplication {
 		String testInput = """           
 				class Main {
 				    public static void main(String[] args) {
-				    	System.out.println(52);				        					        					    						    			    				  				        
+				    	System.out.println( 4 + (2 * 5));				        					        					    						    			    				  				        
 				    }				    				    				 
 				}
-				
+				/*
 				class Calculator {
 					boolean usage;
 									   									    					    
-				    public int add(int a, int b) {				    	
-				        System.out.println(a + b);
-				        usage = true;
+				    public int add(int a, int b) {	
+				    	usage = false;			    	
+				        System.out.println(a + b);					        				        			        
 				        return a + b;
 				    }
 				    
 				    public int sub(int a, int b) {
-				    	System.out.println(a - b);
-				    	usage = true;
+				    	System.out.println(a - b);				    
 				    	return a - b;				    
 				    }
 				    
 				    public int mul(int a, int b) {
-				    	System.out.println(a*b);
-				    	usage = true;
+				    	System.out.println(a*b);				    	
 				    	return a * b;
 				    }
 				    
 				    public int div(int a, int b) {
-				    	System.out.println(a/b);
-				    	usage = true;
+				    	System.out.println(a/b);				    	
 				    	return a / b;
 				    }
 				    
@@ -74,7 +71,17 @@ public class CompilerApplication {
 						div = calculator.div(7, 8);
 						return;
 					}			
-				}				
+				} 
+										
+				class Test{
+					int[] array;
+					
+					public Test() {
+						array = new int[10];
+						array[0] = 1;
+						System.out.println(array[0]);
+					} 
+				}	*/	
             """;
 		// convert input to a stream of characters
 		CharStream input = CharStreams.fromString(testInput);

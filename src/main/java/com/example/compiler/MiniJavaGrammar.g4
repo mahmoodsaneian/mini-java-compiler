@@ -28,14 +28,16 @@ statement   : '{' (statement)* '}'
             | 'while' '(' expression ')' statement
             | 'System.out.println' '(' expression ')' ';'
             | IDENTIFIER '=' expression ';'
-            | expression '=' expression ';'
             | IDENTIFIER '[' expression ']' '=' expression ';';
 
-expression  : expression ('&&' | '||' | '==' | '/' | '>' | '=<' | '>=' | '<' | '+' | '-' | '*') expression
+expression  : expression ('*' | '/') expression
+            | expression ('+' | '-') expression
+            | expression ('&&' | '||' | '==' | '>' | '=<' | '>=' | '<') expression
             | expression '[' expression ']'
             | expression '.' 'length'
             | expression '.' IDENTIFIER '(' (expression (',' expression)*)? ')'
             | expression '.' IDENTIFIER
+            | expression '=' expression ';'
             | INTEGER_LITERAL
             | STRING_LITERAL
             | 'true'
