@@ -10,10 +10,15 @@ import org.antlr.v4.runtime.tree.ParseTreeWalker;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
+import java.util.List;
+
 @SpringBootApplication
 public class CompilerApplication {
 
 	public static void main(String[] args) {
+//		long startTime = System.nanoTime();
+//		Runtime runtime = Runtime.getRuntime();
+//		long memoryBefore = runtime.totalMemory() - runtime.freeMemory();
 		String testInput = """           
 				class Main {
 				    public static void main(String[] args) {
@@ -99,7 +104,21 @@ public class CompilerApplication {
 
 		MiniJavaTACGenerator generator = new MiniJavaTACGenerator();
 		generator.visit(parseTree);
-		generator.writeTAC();
+		//generator.writeTAC();
+		List<String> tacs = generator.getTAC();
+
+		Optimization opt = new Optimization();
+		List<String> strings = opt.optimizeTAC(tacs);
+		System.out.println(strings);
+
+//		long endTime = System.nanoTime();
+//		long duration = endTime - startTime;
+//		System.out.println("duration: "+ duration);
+
+//		long memoryAfter = runtime.totalMemory() - runtime.freeMemory();
+//		long memoryUsed = memoryAfter - memoryBefore;
+//		System.out.println("memoryUsed: "+ memoryUsed);
+
 	}
 
 }
